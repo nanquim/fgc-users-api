@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MassTransit;
 using FGC.Users.Infrastructure.Persistence.Contexts;
 using FGC.Users.Infrastructure.Persistence.Seed;
 using FGC.Users.Infrastructure.Repositories;
@@ -23,6 +24,20 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 #region Application Services
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
+#endregion
+
+#region MassTransit + RabbitMQ
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMQ:Host"], "/", h =>
+        {
+            h.Username(builder.Configuration["RabbitMQ:Username"] ?? "guest");
+            h.Password(builder.Configuration["RabbitMQ:Password"] ?? "guest");
+        });
+    });
+});
 #endregion
 
 #region MVC

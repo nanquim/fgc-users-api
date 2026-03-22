@@ -5,16 +5,20 @@ using FGC.Users.Domain.ValueObjects;
 using FGC.Users.Application.DTOs;
 using FGC.Users.Application.Validators;
 using FGC.Users.Application.Security;
+using FGC.Users.Application.Contracts.Events;
+using MassTransit;
 
 namespace FGC.Users.Application.Services;
 
 public class UserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public UserService(IUserRepository userRepository)
+    public UserService(IUserRepository userRepository, IPublishEndpoint publishEndpoint)
     {
         _userRepository = userRepository;
+        _publishEndpoint = publishEndpoint;
     }
 
     public async Task<Guid> CreateAsync(CreateUserRequest request)
@@ -33,6 +37,12 @@ public class UserService
         var user = new User(request.Name, email, passwordHash, UserRole.User);
 
         await _userRepository.AddAsync(user);
+
+        await _publishEndpoint.Publish(new UserCreatedEvent(
+            user.Id,
+            user.Name,
+            user.Email.Value,
+            DateTime.UtcNow));
 
         return user.Id;
     }
