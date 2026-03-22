@@ -1,0 +1,99 @@
+## .NET / C#
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.swp
+*.*~
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]uild[Ll]og.*
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+## NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/node_modules/
+
+## Visual Studio
+.vs/
+*.cache
+*.csproj.user
+*.csproj.bak
+*.sln.bak
+*.suo
+*.user
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+## Environment / Secrets
+.env
+.env.*
+appsettings.Development.json
+**/appsettings.local.json
+
+## EF Core
+*.db
+*.db-shm
+*.db-wal
+
+## Coverage
+coverage/
+*.opencover.xml
+*.cobertura.xml
+TestResults/
