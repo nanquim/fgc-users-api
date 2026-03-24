@@ -9,7 +9,7 @@ RUN dotnet restore "FGC.Users.Api/FGC.Users.Api.csproj"
 
 COPY . .
 WORKDIR "/src/FGC.Users.Api"
-RUN dotnet publish -c Release -o /app/publish --no-restore
+RUN dotnet publish -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
